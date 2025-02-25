@@ -39,4 +39,4 @@ A simple and intuitive tool to help users manage and track their subscriptions. 
  Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/subscription-tracker.git
+   git clone https://github.com/rytchie/subscription-tracker.git
