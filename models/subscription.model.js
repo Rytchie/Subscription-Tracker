@@ -67,7 +67,7 @@ const subscriptionSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-subscriptionSchema.pre('save', function () {
+subscriptionSchema.pre('save', function (next) {
     if(!this.renewalDate){
         const renewalPeriods = {
             'daily': 1,
@@ -78,6 +78,12 @@ subscriptionSchema.pre('save', function () {
         this.renewalDate = new Date(this.this.startDate);
         this.renewalDate.setDate(this.renewalDate.getDate() + renewalPeriods[this.frequency]);
     }
+
+    if(this.renewalDate < new Date()){
+        this.status = 'expired';
+    }
+
+    next();
 })
 
 export const Subscription = mongoose.model('Subscription', subscriptionSchema);
